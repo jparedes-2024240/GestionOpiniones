@@ -10,6 +10,7 @@ import { helmetOptions } from './helmet.configuration.js';
 import { requestLimit } from './rateLimit.configuration.js';
 import { errorHandler } from '../middlewares/handle-errors.js';
 import postsRoutes from '../src/posts/post.routes.js';
+import commentsRoutes from '../src/comments/comment.routes.js';
 
 const BASE_PATH = '/gos/v1';
 
@@ -25,6 +26,8 @@ const middlewares = (app) => {
 
 const routes = (app) => {
     app.use(`${BASE_PATH}/posts`, postsRoutes);
+
+    app.use(`${BASE_PATH}/comments`, commentsRoutes);
 
     app.get(`${BASE_PATH}/health`, (req, res) => {
         res.status(200).json({
