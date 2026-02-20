@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:13
+    container_name: pg_opinion
+    environment:
+      POSTGRES_USER: IN6AV
+      POSTGRES_PASSWORD: In6avG3st0r$
+      POSTGRES_DB: opinion_gestor_users
+    ports:
+      - "5436:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
