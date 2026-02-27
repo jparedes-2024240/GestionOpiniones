@@ -12,11 +12,9 @@ const commentSchema = new Schema(
             maxLength: [500, 'El comentario no puede exceder 500 caracteres'],
         },
         author: {
-            type: Schema.Types.ObjectId,
-            ref: 'User',
+            type: String,
             required: [true, 'El autor es requerido'],
         },
-
         post: {
             type: Schema.Types.ObjectId,
             ref: 'Post',

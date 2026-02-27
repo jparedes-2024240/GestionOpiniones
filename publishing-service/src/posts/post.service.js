@@ -9,28 +9,21 @@ export const createPostRecord = async ({ postData, user }) => {
   return post
 }
 
-export const fetchPosts = async ({
-  page = 1,
-  limit = 10,
-  category,
-  author,
-  isActive = true,
-}) => {
-  const filter = { isActive }
+export const fetchPosts = async ({ page = 1, limit = 10, category, author, isActive = true }) => {
+  const filter = { isActive };
 
-  if (category) filter.category = category
-  if (author) filter.author = author
+  if (category) filter.category = category;
+  if (author) filter.author = author;
 
-  const pageNumber = parseInt(page)
-  const limitNumber = parseInt(limit)
+  const pageNumber = parseInt(page);
+  const limitNumber = parseInt(limit);
 
   const posts = await Post.find(filter)
-    .populate('author', 'username email')
     .limit(limitNumber)
     .skip((pageNumber - 1) * limitNumber)
-    .sort({ createdAt: -1 })
+    .sort({ createdAt: -1 });
 
-  const total = await Post.countDocuments(filter)
+  const total = await Post.countDocuments(filter);
 
   return {
     posts,
@@ -41,11 +34,10 @@ export const fetchPosts = async ({
       limit: limitNumber,
     },
   }
-}
+};
 
 export const fetchPostById = async ({ id, isActive = true }) => {
-  const post = await Post.findOne({ _id: id, isActive })
-    .populate('author', 'username email');
+  const post = await Post.findOne({ _id: id, isActive });
 
   if (!post) {
     throw new Error('Publicación no encontrada.');
