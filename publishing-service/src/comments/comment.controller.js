@@ -20,10 +20,9 @@ export const createComment = async (req, res) => {
 
 export const getCommentsByPost = async (req, res) => {
     try {
-        const { page = 1, limit = 10, isActive = true } = req.query
-        const { postId } = req.params;
-
-        const { comments, pagination } = await fetchCommentsByPost({ postId, page, limit, isActive });
+        const { page = 1, limit = 10, isActive } = req.query;
+        const isActiveParsed = isActive === undefined ? true : isActive === 'true';
+        const { comments, pagination } = await fetchCommentsByPost({ postId: req.params.postId, page, limit, isActive: isActiveParsed });
 
         res.status(200).json({
             success: true,
