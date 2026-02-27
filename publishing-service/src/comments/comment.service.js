@@ -19,12 +19,7 @@ export const createCommentRecord = async ({ commentData, user }) => {
     return comment;
 }
 
-export const fetchCommentsByPost = async ({
-    postId,
-    page = 1,
-    limit = 10,
-    isActive = true,
-    }) => {
+export const fetchCommentsByPost = async ({ postId, page = 1, limit = 10, isActive = true }) => {
     const filter = {
         post: postId,
         isActive,
@@ -34,7 +29,6 @@ export const fetchCommentsByPost = async ({
     const limitNumber = parseInt(limit);
 
     const comments = await Comment.find(filter)
-        .populate('author', 'username')
         .limit(limitNumber)
         .skip((pageNumber - 1) * limitNumber)
         .sort({ createdAt: -1 });

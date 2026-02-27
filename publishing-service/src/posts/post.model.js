@@ -27,8 +27,7 @@ const postSchema = new Schema(
             maxLength: [2000, 'El contenido no puede exceder 2000 caracteres'],
         },
         author: {
-            type: Schema.Types.ObjectId,
-            ref: 'User',
+            type: String,
             required: [true, 'El autor es requerido'],
         },
         isActive: {
