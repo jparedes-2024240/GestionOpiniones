@@ -1,4 +1,4 @@
-import { createPostRecord, fetchPosts, updatePostRecord, deletePostRecord } from './post.service.js';
+import { createPostRecord, fetchPosts, fetchPostById, updatePostRecord, deletePostRecord } from './post.service.js';
 
 export const createPost = async (req, res) => {
     try {
@@ -20,9 +20,10 @@ export const createPost = async (req, res) => {
 
 export const getPosts = async (req, res) => {
     try {
-        const { page = 1, limit = 10, category, author, isActive = true } = req.query;
-        const { posts, pagination } = await fetchPosts({ page, limit, category, author, isActive });
-
+        const { page = 1, limit = 10, category, author, isActive } = req.query;
+        const isActiveParsed = isActive === undefined ? true : isActive === 'true';
+        const { posts, pagination } = await fetchPosts({ page, limit, category, author, isActive: isActiveParsed });
+        
         res.status(200).json({
             success: true,
             message: 'Publicaciones obtenidas correctamente!',
@@ -37,6 +38,27 @@ export const getPosts = async (req, res) => {
         });
     }
 }
+
+export const getPostById = async (req, res) => {
+    try {
+        const post = await fetchPostById({
+            id: req.params.id,
+            isActive: true
+        });
+
+        res.status(200).json({
+            success: true,
+            message: 'Publicación obtenida correctamente!',
+            data: post,
+        });
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            message: 'Error al obtener la publicación.',
+            error: err.message
+        })
+    }
+};
 
 export const updatePost = async (req, res) => {
     try {

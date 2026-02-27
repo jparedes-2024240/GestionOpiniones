@@ -1,28 +1,54 @@
-# Build
-bin/
-obj/
+# Node
+**/node_modules/
+**/.pnpm-store/
+**/.pnpm-workspace-state-v1.json
+**/.modules.yaml
 
 # Logs
 logs/
 *.log
+*.log.*
+pids/
+*.pid
+*.seed
+*.pid.lock
 
-# User files
-*.user
-*.suo
+# Runtime data
+dist/
+build/
+temp/
+tmp/
 
-# Rider / VSCode
+# VS Code
 .vscode/
-.idea/
+.history/
 
 # Visual Studio
 .vs/
 
-# OS
+# OS files
 .DS_Store
 Thumbs.db
+ehthumbs.db
+Icon?
+Desktop.ini
 
-# Keys
-keys/
+# MongoDB (si creas dumps o archivos locales)
+dump/
+*.bson
 
-# Publish
-publish/
+# IDE / Editor
+.idea/
+
+# Others
+*.swp
+*.swo
+*.sublime-workspace
+*.sublime-project
+
+# .NET bin/obj folders
+**/bin/
+**/obj/
+
+# Keys y archivos sensibles
+**/keys/

@@ -43,6 +43,17 @@ export const fetchPosts = async ({
   }
 }
 
+export const fetchPostById = async ({ id, isActive = true }) => {
+  const post = await Post.findOne({ _id: id, isActive })
+    .populate('author', 'username email');
+
+  if (!post) {
+    throw new Error('Publicación no encontrada.');
+  }
+
+  return post;
+};
+
 export const updatePostRecord = async ({ id, postData, user }) => {
   const post = await Post.findById(id)
 
